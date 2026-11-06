@@ -37,12 +37,12 @@ func TestMatrix(t *testing.T) {
 			c, _ := must2(twin.Issue(minica.LeafOptions{CommonName: "mallory"}))
 			return &c
 		}},
-		{"certificat expiré", false, "expired", func(e *env) *tls.Certificate {
+		{"certificat expiré", false, "is after", func(e *env) *tls.Certificate {
 			c, _ := must2(e.trusted.Issue(minica.LeafOptions{
 				CommonName: "alice", NotBefore: time.Now().Add(-48 * time.Hour), NotAfter: time.Now().Add(-24 * time.Hour)}))
 			return &c
 		}},
-		{"certificat pas encore valide", false, "expired", func(e *env) *tls.Certificate {
+		{"certificat pas encore valide", false, "is before", func(e *env) *tls.Certificate {
 			c, _ := must2(e.trusted.Issue(minica.LeafOptions{
 				CommonName: "alice", NotBefore: time.Now().Add(24 * time.Hour), NotAfter: time.Now().Add(48 * time.Hour)}))
 			return &c
