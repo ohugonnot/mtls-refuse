@@ -47,7 +47,7 @@ docker run --rm -v "$PWD":/src -w /src golang:1.26 sh -c 'go vet ./... && go tes
 | Une liste périmée, ou l'absence de liste, ferme au lieu d'ouvrir | Vérifié | `TestStaleCRLFailsClosed`, `TestNoCRLFailsClosed` |
 | Révoquer le numéro de série 7 d'une autorité ne révoque pas le 7 d'une autre autorité de même nom | Vérifié | `TestSameSerialInTwoAuthorities` |
 | Chacune des dix mutations est attrapée, et la révocation déplacée dans `VerifyPeerCertificate` n'est attrapée que par le test de reprise | Vérifié | `./mutations.sh`, essai du 06/11/2026 sur Go 1.24.13 et Go 1.26.10 |
-| La CI GitHub Actions passe | **Non vérifié** | pas encore exécutée |
+| La CI GitHub Actions passe (`go vet`, `go test -race`, `./mutations.sh`) | Vérifié | exécution 42301420328 (06/11/2026) sur Go 1.24 et Go 1.26, commit `48881ff` ; seul `ubuntu-latest` a été essayé |
 | Les tests passent sur Go 1.24.13 et Go 1.26.10 (Linux, Docker) | Vérifié | exécutions locales du 06/11/2026 |
 | Les tests passent sous macOS, Windows, ou avec une autre version de Go | **Non vérifié** | |
 | OCSP | **Non traité** | le dépôt ne parle pas OCSP ; `crypto/tls` ne vérifie pas de réponse OCSP pour un certificat client |
@@ -94,7 +94,7 @@ docker run --rm -v "$PWD":/src -w /src golang:1.26 sh -c 'go vet ./... && go tes
 
 ## Proof register
 
-See the French table above: every row names the test that proves it, or says "Non vérifié" (not verified) or "Non traité" (not handled). Not covered: OCSP, fetching the list over HTTP, intermediate authorities, delta and indirect lists, HTTP/2, TLS 1.2 session tickets, other operating systems. The GitHub Actions run has not happened yet.
+See the French table above: every row names the test that proves it, or says "Non vérifié" (not verified) or "Non traité" (not handled). Not covered: OCSP, fetching the list over HTTP, intermediate authorities, delta and indirect lists, HTTP/2, TLS 1.2 session tickets, other operating systems. The GitHub Actions run 42301420328 (06/11/2026, Go 1.24 and 1.26, `ubuntu-latest` only) is green.
 
 ## Licence
 
